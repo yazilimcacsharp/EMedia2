@@ -160,13 +160,24 @@ IsApproved-IsActive alanı birleştirilip yeni 3 durumluı bir alan oluşacak
 urunyorumonayla sayfasında 0 olanlar getirilecek.
 eğer onaylanmışsa 1 olaracak kaydedilecek. red yemişse 2 olacak
 ek olarak urunredsayfası eklenecek ki hangi yorumlar red edilmişse gözükecek
-detay template'i giydirilecek.
+detay template'i giydirilecek. ++
 
 
-Urune Yıldız Verme Ekranı
+Urune Yıldız Verme Ekranı başladık Detailsda var.
+buglar
+1.urun fiyat bilgisindeki fiyat*1.20 hesaplama yapmıyor
+2.urun yorumyap kısmı ekranda en sağda gözükmeli(css)
+3.rating alanındaki yıldızlar bozuk!
+4.yorum yapılırken yıldız eklenecek bunu productcomment model içerisine int türünden puan tanımlamak, migration ,update database
+5.o urune kim kaç yıldız vermiş, ortalama alıp gösterme
+6.kişi adı john doe değil bizim email adresimiz olmalı
+
 Sepete Ürün Ekleme (Session)
 
 Whatsapp Destek APi baglama
+
+
+--rock muzik album - rock muzik kategorisi - metal .
 
 
 

@@ -238,6 +238,9 @@ namespace EMedia.Controllers
             {
                 item.IsApproved = 1;
             }
+            
+            _artDBContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
