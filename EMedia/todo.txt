@@ -1,0 +1,204 @@
+﻿Müzik/film eticaret Sitesi
+-Admin Panelli
+-Üyelik Sistemli
+-Sepet Mantığı
+-Ödeme Mantığı (!!! gerçek firma olmalı, banka ile anlaşmak gerek, ziraat ödemesi, iyzico, paytr )
+
+
+1.template seç
+2.https://themewagon.com/themes/free-bootstrap-ecommerce-template-electro/  buradan  indir.
+3.boş mvc üyelik sistemli proje aç
+4.css-js-fonts-img bunları projedeki wwwroot içerisine taşıdık.
+5.blank.html sayfasını layout olarak projeye ekleyelim.
+6.blank.html içerisindeki yukarıdaki kodları ve footer alanındaki kodları ekledik. (layout içine)
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />  bu kodu 
+<link type="text/css" rel="stylesheet" href="~/css/bootstrap.min.css" />  değiştirdik.
+7.aynı ~/ içeren versiyonları js içerisindeki yerlere de ekledik.
+8.bu templatei home/test içerisinde test ettik.
+9.logo tasarladık. img/logo.png yerine yeni tasarladıgımız logoyu ekledik.
+
+Index.html içerisindeki kodları tasarımı Home/Index sayfasına taşıyalım. ++
+Ekranda gözükmesini istemediklerimizi silelim. (kategorileri belirleme)
+-kategori     (müzik, film ,tiyatro, konser)
+
+Context içerisindeki onmodelCreating için kategori datalarını ekleyecek (data seed) 
+
+-kategoritur  (pop, rock)
+-alt kategori (müzik albümleri, müzik aletleri)
+
+
+anasayfadaki footter alanında bulunan location, telefon ve mail ikonlarının rengini mor yapın. (getir moru)
+
+
+projenin olmazsa olmazları
+-logging  : loglama kayıt defteri. kim ne zmn giriş yaptı, hangi işleri yaptı.
+-msjlaşma yapısı (quee yapısı) - RabbitMQ (hangfire)
+
+hızlandırmak
+-caching : arkada veri tutma.
+-sql tablolarına indeks, veritabanı ilişkisini düzenlemek
+-aramayı hızlandırmak (elasticsearch-indeksleme)
+
+
+
+Layout içerisinde dbdeki dataları göstermek için Layouta özel viewmodel hazırladık.
+HomeController/Index içerisinde veriyi doldurduk.
+ViewBag.LayoutModel = layoutModel; ile datayı view tarafına taşıdık.
+LayoutNew sayfasının en tepesinde viewbagten modeli tanımladık
+
+@{
+	var layoutModel = ViewBag.LayoutModel as EMedia.ViewModels.LayoutViewModel;
+}
+
+sayfadaki asıl verinin gözükeceği yerde alttaki tanımlayı yazdık
+
+	<ul class="main-nav nav navbar-nav">				
+	@foreach (var item in layoutModel.MenuItems)
+    {
+		<li><a href="#">@item</a></li>
+	}
+	</ul>
+
+
+-kategori      (id,ad,isActive)				    (müzik,tiyatro,konser,film)
+-alt kategori  (id,ad,kategoriid,isActive)	    (pop, rock)
+-Urunler       (id,ad,altkategoriid,isActive,fiyat,eklenmetarihi,stokadet)   (müzik albümleri, müzik aletleri)
+
+
+
+projede ürünlere random bir indirim oranı eklemek istiyoruz?
+indirim  oranı 10 ile 70 arasında olsun.
+kod 1 kez çalışacak sekilde kodlanacak(işimiz bitince kodu yoruma alarak ilerliyoruz)
+tablo tarafına bu değişiklik yansımalı? evet
+
+1.Models katmanındaki ilgili class(Product.cs) alanı tanımla(prop yaz tab tab) indirim oranının türünü aDINI BELİRLE +++
+2.add-migration ile sql tarafında çalışacak kodu yazdırt+
+3.update-database ile bu değişiklik sqlde çalışmasını ve tabloya eklenmesini sağla.+
+4.random ile 17 tane 10-70 aralıgında indirim oranı üret ve tabloya yazacak c# kodunu yaz+
+5.products/index sayfasında %30 yazan yeri bul, her ürünün indirim oranına karşılık gelecek alanı ekle.+
+
+--------------------
+fiyattan indirim oranını düşürüp güncel fiyatı /Index sayfasında gösterelim.++
+
+100 - (100*10/100)=90
+ListPrice-(ListPrice*(DiscountRate/100))
+
+------------------
+Register/Login sayfalarının tasarımını düzeltelim. (logo )
+update-database ya da arayüzü kullanarak yapabiliriz. (RolTabanlı olmalı) program.cs içerisine rolEkleme kısmı tanımlanacak
+
+
+
+--admin panel tasarım yapılacak (seçilecek)
+--UyeEkle +,
+--RolEkle +,
+--UyeyeRolAtama (eski projedden buraya taşınacak- backend front end)+
+
+(UyelikSistemiOrnekRolTabanli : eski proje)
+
+
+Urune Yorum Yapma Ekranı
+-üyelik girişi olmalı
+-film satın aldı mı? 
+-her üye 1 yorum yapabilmeli
+
+Yorum tablosu
+-id,ad,puan,aktifMi,yorumtarihi
+
+1 kişi 1den fazla ürüne yorum yapabilir mi? evet
+1 ürüne 1den fazla ürüne yorum yapabilir mi? evet
+
+UrunYorum 
+-id,mailid,yorumid,onaylandiMi,onaylanmaTarihi,
+
+--Urun Yorum Onaylama Ekranı (admin olan kişi onaylar)
+--eğer onaylanmışsa urun tarafında hesaba katılır.
+
+
+Üyelikte register,login olmalı +
+
+Comment tablosunun db tarafında oluşması için Contexte eklemem gerekir mi?
+evet
+
+Ürün Ekleme Ekranı 
+(Admin)
+ad
+fiyat
+altkategori
+stok
+foto
+ürün ekleme ekranı  +
+
+git Nedir?
+versiyon kontrol sistemi olarak geçer.
+svn,tfs,git
+
+master : ana branch (dal-çalışma alanı)
+1.master branchini al
+2.TLP-4242 bu iş için yeni bir branch açarım. Bu branchh master klonu
+3.değişiklikleri kodları 2nolu basamaktaki branche yaz.
+4.code review( kodu gözden geçiren takım lideri) sonrası 2deki branchi master'a merge et. (2deki değişiklikleri mastera birleştir.)
+
+conflict : 2 kişi aynı dosyada çalışmışsa bu 2 farklı versiyonun çakışması durumu söz konusudur.
+
+
+Sprint 
+2 haftalık çalışma planı çıkartılır
+Azure Devops Task-UserStory-Feature ile board üzerinde taskler açılır ve eforlandırılır.
+
+Scrum modeli yukarıdaki çalışma modeli
+dbden veri çekip getirip gösterme taskini eforlandırıyor (scrum poker)
+1 2 3 5 8 13
+
+Urun Yorum Ekranı           ++++
+Urun Yorum Onay Ekranı      ++++
+
+--  update ProductComments set UserId='196059e1-28d5-415a-b6a0-4810031bdb82'
+Urun Yorum Sayfasındaki onayla-red buttonu çalıştırılacak  
+IsApproved-IsActive alanı birleştirilip yeni 3 durumluı bir alan oluşacak
+0:yeni eklenenler, 1:onaylanan, 2:reddedilenler
+urunyorumonayla sayfasında 0 olanlar getirilecek.
+eğer onaylanmışsa 1 olaracak kaydedilecek. red yemişse 2 olacak
+ek olarak urunredsayfası eklenecek ki hangi yorumlar red edilmişse gözükecek
+detay template'i giydirilecek.
+
+
+Urune Yıldız Verme Ekranı
+Sepete Ürün Ekleme (Session)
+
+Whatsapp Destek APi baglama
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

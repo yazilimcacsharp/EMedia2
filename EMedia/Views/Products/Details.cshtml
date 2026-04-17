@@ -1,0 +1,100 @@
+﻿@* @using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model EMedia.Models.Product
+
+
+<p>@Model.Name</p>
+
+<p>@Model.Price</p>
+
+<p>@Model.Stock</p>
+
+<img src="@Model.FotoPath" style="width:100px;height:100px;" /> *@
+
+@* @foreach (var pc in Model.ProductComments.Where(satir=>satir.IsActive==true || (satir.IsActive==false)&& satir.UserId==User.Identity.Name)) *@
+@* 
+@foreach (var pc in Model.ProductComments.Where(satir=>satir.IsActive==true))
+{
+    <p>@pc.Comment.Text</p>
+} *@
+
+@* kullanıcı login ise yorum yap görecek *@
+
+@* @if (SignInManager.IsSignedIn(User))
+{
+    <form asp-action="YorumYap" asp-controller="Products" method="post">
+        <input type="hidden" name="productid" value="@Model.Id" />
+        <input type="text" name="yorum"/>  
+        <input type="submit" value="YorumYap" class="btn btn-danger btn-sm ms-2" />
+    </form>    
+} *@
+
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model EMedia.Models.Product
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">@Model.Name</h3>
+                </div>
+
+                <div class="panel-body text-center">
+                    <img src="@Model.FotoPath" class="img-responsive img-thumbnail" style="margin:auto; max-height:150px;" />
+
+                    <hr />
+
+                    <p><strong>Fiyat:</strong> @Model.Price</p>
+                    <p><strong>Stok:</strong> @Model.Stock</p>
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Yorumlar</h4>
+                </div>
+
+                <div class="panel-body">
+                    @foreach (var pc in Model.ProductComments.Where(satir => satir.IsApproved == 1))
+                    {
+                        <div class="well well-sm">
+                            @pc.Comment.Text
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Yorum Yap</h4>
+                    </div>
+
+                    <div class="panel-body">
+                        <form asp-action="YorumYap" asp-controller="Products" method="post">
+                            <input type="hidden" name="productid" value="@Model.Id" />
+
+                            <div class="form-group">
+                                <label>Yorumunuz</label>
+                                <input type="text" name="yorum" class="form-control" />
+                            </div>
+
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                Yorum Yap
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+

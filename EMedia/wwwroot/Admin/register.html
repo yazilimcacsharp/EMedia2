@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Transparent Register Form UI</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+    <link href="~/admin/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+    <div class="bg-img">
+        <div class="content">
+            <header>Register Form</header>
+
+            <form action="#">
+
+                <!-- Full Name -->
+                <div class="field">
+                    <span class="fa fa-user"></span>
+                    <input type="text" required placeholder="Full Name">
+                </div>
+
+                <!-- Email -->
+                <div class="field space">
+                    <span class="fa fa-envelope"></span>
+                    <input type="email" required placeholder="Email">
+                </div>
+
+                <!-- Phone -->
+                <div class="field space">
+                    <span class="fa fa-phone"></span>
+                    <input type="text" required placeholder="Phone Number">
+                </div>
+
+                <!-- Password -->
+                <div class="field space">
+                    <span class="fa fa-lock"></span>
+                    <input type="password" class="pass-key" required placeholder="Password">
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="field space">
+                    <span class="fa fa-lock"></span>
+                    <input type="password" class="confirm-pass" required placeholder="Confirm Password">
+                </div>
+
+                <div class="field">
+                    <input type="submit" value="REGISTER">
+                </div>
+
+            </form>
+
+            <div class="login">Or register with</div>
+
+            <div class="links">
+                <div class="facebook">
+                    <i class="fab fa-facebook-f"><span>Facebook</span></i>
+                </div>
+                <div class="instagram">
+                    <i class="fab fa-instagram"><span>Instagram</span></i>
+                </div>
+            </div>
+
+            <div class="signup">
+                Already have an account?
+                <a href="#">Login Now</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

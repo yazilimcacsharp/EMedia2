@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+}
+<h1>Üye Ekle</h1>
+
+<form asp-action="UserEkle" method="post">
+
+    <label>Kullanıcı Adı: </label>
+    <input type="text" name="UserName" required />
+
+    <label>Şifre: </label>
+    <input type="password" name="Password" required />
+
+    <button type="submit">Üye Ekle</button>
+
+</form>

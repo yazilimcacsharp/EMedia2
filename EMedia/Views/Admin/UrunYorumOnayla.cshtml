@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+}
+
+@model IEnumerable<EMedia.Models.ProductComment>
+
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Yorum</th>
+            <th>Kullanıcı</th>
+            <th>Ürün</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Where(satir=>satir.IsApproved==0))
+        {
+            <tr>
+                <td>
+                    <p>@item.Comment.Text</p>
+                </td>
+                <td>
+                    <p>@item.UserId</p>
+                </td>
+                <td>
+                    <p>@item.Product.Name</p>
+                </td>
+                <td>
+                    <form asp-action="UrunYorumOnayla" asp-controller="Admin" method="post">
+                        <input type="hidden" name="commentId" value="@item.Id" />
+                        <input type="submit" value="Onayla" class="btn btn-success btn-sm" />
+                    </form>
+                    <form asp-action="UrunYorumRed" asp-controller="Admin" method="post">
+                        <input type="hidden" name="commentId" value="@item.Id" />
+                        <input type="submit" value="Reddet" class="btn btn-danger btn-sm ms-2" />
+                    </form>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form asp-action="TopluOnay" asp-controller="Admin" method="post">
+<input type="submit" value="Tüm Yorumları Onayla" class="btn btn-danger btn-sm ms-2" />
+</form>
+
+                        

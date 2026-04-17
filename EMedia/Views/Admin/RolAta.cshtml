@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Kullanıcıya Rol Atama";
+    Layout = "_LayoutAdmin";
+
+}
+
+<h1>Rol Ata</h1>
+
+<form asp-action="RolAta" method="post">
+
+    <div style="margin-bottom:15px;">
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success">
+                @TempData["Success"]
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["Error"]
+            </div>
+        }
+    </div>
+
+
+
+    <label>Kullanıcı:</label>
+    <select name="UserName" required>
+        @foreach (var user in ViewBag.Users)
+        {
+            <option value="@user.UserName">@user.UserName</option>
+        }
+    </select>
+
+    <br />
+
+    <label>Rol:</label>
+    <select name="RoleName" required>
+        @foreach (var role in ViewBag.Roles)
+        {
+            <option value="@role.Name">@role.Name</option>
+        }
+    </select>
+
+    <br />
+
+    <button type="submit">Rol Ata</button>
+</form>
