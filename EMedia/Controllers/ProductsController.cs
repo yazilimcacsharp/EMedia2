@@ -69,13 +69,16 @@ namespace EMedia.Controllers
             string fotopath = product.FotoPath;
             product.FotoPath = "/";
             product.FotoPath += fotopath;
+
+            ViewBag.Adet= _artDBContext.ProductComments.Where(satir=>satir.ProductId==id && satir.IsApproved==1).Count();
+
             return View(product);
 
         }
 
 
         [HttpPost]
-        public IActionResult YorumYap(string productid,string yorum)
+        public IActionResult YorumYap(string productid,string yorum,string rating)
         {
             //1.yorumu yorum tablosuna ekleyelim.
             //2.o son yorumun id bilgisini alalım.

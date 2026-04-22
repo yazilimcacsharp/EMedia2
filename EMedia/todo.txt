@@ -142,6 +142,7 @@ master : ana branch (dal-çalışma alanı)
 conflict : 2 kişi aynı dosyada çalışmışsa bu 2 farklı versiyonun çakışması durumu söz konusudur.
 
 
+
 Sprint 
 2 haftalık çalışma planı çıkartılır
 Azure Devops Task-UserStory-Feature ile board üzerinde taskler açılır ve eforlandırılır.
@@ -149,6 +150,8 @@ Azure Devops Task-UserStory-Feature ile board üzerinde taskler açılır ve efo
 Scrum modeli yukarıdaki çalışma modeli
 dbden veri çekip getirip gösterme taskini eforlandırıyor (scrum poker)
 1 2 3 5 8 13
+
+
 
 Urun Yorum Ekranı           ++++
 Urun Yorum Onay Ekranı      ++++
@@ -164,11 +167,24 @@ detay template'i giydirilecek. ++
 
 
 Urune Yıldız Verme Ekranı başladık Detailsda var.
+
 buglar
-1.urun fiyat bilgisindeki fiyat*1.20 hesaplama yapmıyor
-2.urun yorumyap kısmı ekranda en sağda gözükmeli(css)
-3.rating alanındaki yıldızlar bozuk!
+1.urun fiyat bilgisindeki fiyat*1.20 hesaplama yapmıyor+++
+<h3 class="product-price">@Model.Price <del class="product-old-price">@(Model.Price * 1.2m)</del></h3>
+
+2.urun yorumyap kısmı ekranda en sağda gözükmeli(css)++
+3.rating alanındaki yıldızlar bozuk! kodları alttakini ekleyerek sarmaladık satır no: Detailsdaki 330
+		<form class="review-form">
+		</form>
 4.yorum yapılırken yıldız eklenecek bunu productcomment model içerisine int türünden puan tanımlamak, migration ,update database
+
+public int Point { get; set; } //urune kullanıcı tarafından verilen puan bilgisi
+public DateOnly CreatedDate { get; set; } //urune yorum yapılma zamanını tutacak
+
+4.4 urun yorumlarında urun yorum varsa count bilgisi>0 oldugu için div gözüküyor ama içi boş. onaylı mı eklemek gerek.+++
+
+4.5 Yıldız Ekleme kısmının backendini yazalım.
+
 5.o urune kim kaç yıldız vermiş, ortalama alıp gösterme
 6.kişi adı john doe değil bizim email adresimiz olmalı
 
@@ -178,6 +194,48 @@ Whatsapp Destek APi baglama
 
 
 --rock muzik album - rock muzik kategorisi - metal .
+
+
+
+21.04.2026 gitnotları
+
+pull : çekmek, serverdan kendi lokal makinemize kodu cekmek, kodu güncellemek, getirmek
+
+push : itmek, lokaldeki kodları sunucuya yollamak,göndermek,itmek
+
+yeni 1 branch (dal) : proje kopyasını alıp, yeni çalışma alanını oluşturmak.
+
+merge etmek : gün içerisinde çalıştıgım branchi mastera birleştirmek
+
+PR : pull request: çalıştıgımız branchi mastera göndermek için(birleştirmek)  pr isteği oluşturulur.
+
+
+code review : kodu gözden geçirme, daha iyi daha clean kod yazmanın temelleri 
+
+sonarqube extension'ını kullanarak kodun anlık analizini sağlayabiliriz.
+
+browser cache : eski bir versiyonu
+ctrl+f5 ile son yazdıgımız versiyonun yüklenmesini sağlarız.
+
+
+soru: urun yorum yap ekranında eğer üründe yorum yoksa bu durumda orta alanda bir boşluk gözüküyor. Yorum Yap formu en sagda kalıyor. 
+Bunu nasıl çözeriz? +++ if yazdık
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
