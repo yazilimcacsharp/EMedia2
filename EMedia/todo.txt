@@ -181,9 +181,10 @@ buglar
 public int Point { get; set; } //urune kullanıcı tarafından verilen puan bilgisi
 public DateOnly CreatedDate { get; set; } //urune yorum yapılma zamanını tutacak
 
-4.4 urun yorumlarında urun yorum varsa count bilgisi>0 oldugu için div gözüküyor ama içi boş. onaylı mı eklemek gerek.+++
+4.4 urun yorumlarında urun yorum varsa count bilgisi>0 oldugu için div gözüküyor ama içi boş. 
+onaylı mı eklemek gerek.+++
 
-4.5 Yıldız Ekleme kısmının backendini yazalım.
+4.5 Yıldız Ekleme kısmının backendini yazalım.+++
 
 5.o urune kim kaç yıldız vermiş, ortalama alıp gösterme
 6.kişi adı john doe değil bizim email adresimiz olmalı
