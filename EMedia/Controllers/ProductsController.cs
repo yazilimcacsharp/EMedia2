@@ -105,7 +105,9 @@ namespace EMedia.Controllers
             productComment.ProductId =Convert.ToInt32(productid);
             productComment.CommentId = comment.CommentId; //3.yol
             //productComment.IsActive = false;
+            productComment.Point =int.Parse(rating);
             productComment.IsApproved = 0;
+            productComment.CreatedDate = DateOnly.FromDateTime(DateTime.Now);
             string? username=User.Identity?.Name;
             productComment.UserId = applicationDbContext.Users.Where(satir => satir.UserName == username).FirstOrDefault().Id;
             _artDBContext.ProductComments.Add(productComment);

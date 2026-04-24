@@ -300,15 +300,62 @@
                                             {
                                                 <li>
                                                     <div class="review-heading">
-                                                        <h5 class="name">John</h5>
+                                                        <h5 class="name">@pc.UserId</h5>
                                                         <p class="date">@DateTime.Now</p>
-                                                        <div class="review-rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
+                                                        @if(pc.Point==1){
+                                                             <div class="review-rating">
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star-o empty"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                            <i class="fa fa-star-o empty"></i>
                                                         </div>
+                                                        }
+                                                            @if (pc.Point ==2)
+                                                            {
+                                                                <div class="review-rating">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star-o empty"></i>
+                                                                    <i class="fa fa-star-o empty"></i>
+                                                                    <i class="fa fa-star-o empty"></i>
+                                                                </div>
+                                                            }
+                                                            @if (pc.Point == 3)
+                                                            {
+                                                                <div class="review-rating">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star-o empty"></i>
+                                                                    <i class="fa fa-star-o empty"></i>
+                                                                </div>
+                                                            }
+
+                                                            @if (pc.Point == 4)
+                                                            {
+                                                                <div class="review-rating">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star-o empty"></i>
+                                                                </div>
+                                                            }
+                                                            @if (pc.Point == 5)
+                                                            {
+                                                                <div class="review-rating">
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i class="fa fa-star"></i>
+                                                                </div>
+                                                            }
+
+
+
+                                                        
                                                     </div>
                                                     <div class="review-body">
                                                         <p>    @pc.Comment.Text</p>
