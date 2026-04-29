@@ -186,8 +186,10 @@ onaylı mı eklemek gerek.+++
 
 4.5 Yıldız Ekleme kısmının backendini yazalım.+++
 
-5.o urune kim kaç yıldız vermiş, ortalama alıp gösterme
-6.kişi adı john doe değil bizim email adresimiz olmalı
+5.o urune kim kaç yıldız vermiş, ortalama alıp gösterme++
+her bir ürün için bütün yorumlara bakıp hangi puan kaçar tane bunu hesaplamak ++
+
+6.kişi adı john doe değil bizim email adresimiz olmalı (ödev)
 
 Sepete Ürün Ekleme (Session)
 

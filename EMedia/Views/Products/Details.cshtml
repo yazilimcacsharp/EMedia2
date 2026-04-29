@@ -208,17 +208,36 @@
                                 
                                 <!-- Rating -->
                                 <div class="col-md-3">
+                                    @{
+                                        decimal rating = decimal.Parse(ViewBag.PuanOrtalama) ?? 0;
+
+                                        int fullStars = (int)Math.Floor(rating);
+                                        bool hasHalfStar = (rating - fullStars) >= 0.25m && (rating - fullStars) < 0.75m;
+                                        int emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+                                    }
+
                                     <div id="rating">
                                         <div class="rating-avg">
-                                            <span>4.5</span>
-                                            <div class="rating-stars">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </div>
-                                        </div>
+    <span>@rating.ToString("0.##")</span>
+    <div class="rating-stars">
+
+        @for (int i = 0; i < fullStars; i++)
+        {
+            <i class="fa fa-star"></i>
+        }
+
+        @if (hasHalfStar)
+        {
+            <i class="fa fa-star-half-o"></i>
+        }
+
+        @for (int i = 0; i < emptyStars; i++)
+        {
+            <i class="fa fa-star-o"></i>
+        }
+
+    </div>
+</div>
                                         <ul class="rating">
                                             <li>
                                                 <div class="rating-stars">
@@ -228,10 +247,10 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                 </div>
-                                                <div class="rating-progress">
+                                              @*   <div class="rating-progress">
                                                     <div style="width: 80%;"></div>
-                                                </div>
-                                                <span class="sum">3</span>
+                                                </div> *@
+                                                <span class="sum">@ViewBag.Puan5</span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -241,10 +260,10 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
-                                                <div class="rating-progress">
+                                              @*   <div class="rating-progress">
                                                     <div style="width: 60%;"></div>
-                                                </div>
-                                                <span class="sum">2</span>
+                                                </div> *@
+                                                <span class="sum">@ViewBag.Puan4</span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -254,10 +273,10 @@
                                                     <i class="fa fa-star-o"></i>
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
-                                                <div class="rating-progress">
+                                            @*     <div class="rating-progress">
                                                     <div></div>
-                                                </div>
-                                                <span class="sum">0</span>
+                                                </div> *@
+                                                <span class="sum">@ViewBag.Puan3</span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -267,10 +286,10 @@
                                                     <i class="fa fa-star-o"></i>
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
-                                                <div class="rating-progress">
+                                               @*  <div class="rating-progress">
                                                     <div></div>
-                                                </div>
-                                                <span class="sum">0</span>
+                                                </div> *@
+                                                <span class="sum">@ViewBag.Puan2</span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -280,10 +299,10 @@
                                                     <i class="fa fa-star-o"></i>
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
-                                                <div class="rating-progress">
+                                               @*  <div class="rating-progress">
                                                     <div></div>
-                                                </div>
-                                                <span class="sum">0</span>
+                                                </div> *@
+                                                <span class="sum">@ViewBag.Puan1</span>
                                             </li>
                                         </ul>
                                     </div>
