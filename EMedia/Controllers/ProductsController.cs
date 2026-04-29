@@ -1,9 +1,13 @@
 ﻿using EMedia.Data;
 using EMedia.Helper;
+using EMedia.Migrations;
 using EMedia.Models;
 using EMedia.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing;
+using ProductComment = EMedia.Models.ProductComment;
 
 namespace EMedia.Controllers
 {
@@ -70,7 +74,52 @@ namespace EMedia.Controllers
             product.FotoPath = "/";
             product.FotoPath += fotopath;
 
-            ViewBag.Adet= _artDBContext.ProductComments.Where(satir=>satir.ProductId==id && satir.IsApproved==1).Count();
+            ViewBag.Adet = _artDBContext.ProductComments.Where(satir => satir.ProductId == id && satir.IsApproved == 1).Count();
+
+            //select avg(point),ProductId
+            //from ProductComments where IsApproved = 1 group by ProductId
+
+
+            ViewBag.PuanOrtalama = (_artDBContext.ProductComments
+        .Where(x => x.IsApproved == 1 && x.ProductId == id)
+        .Average(x => (decimal?)x.Point) ?? 0).ToString("0.#");
+
+
+
+            //urun bazında kaç kişi 5 yıldız, kaç kişi 4 yıldız vermiş,3,2,1 gibi bilgileri de viewbag ile gönderebiliriz.
+
+            var ratingCounts = _artDBContext.ProductComments
+    .Where(x => x.IsApproved == 1 && x.ProductId == id)
+    .GroupBy(x => x.Point)
+    .Select(g => new
+    {
+        Point = g.Key,
+        Count = g.Count()
+    })
+    .ToList();
+
+            // ViewBag'e tek tek atayalım (1-5 arası garanti olsun)
+            ViewBag.Puan5 = ratingCounts.FirstOrDefault(x => x.Point == 5)?.Count ?? 0;
+            ViewBag.Puan4 = ratingCounts.FirstOrDefault(x => x.Point == 4)?.Count ?? 0;
+            ViewBag.Puan3 = ratingCounts.FirstOrDefault(x => x.Point == 3)?.Count ?? 0;
+            ViewBag.Puan2 = ratingCounts.FirstOrDefault(x => x.Point == 2)?.Count ?? 0;
+            ViewBag.Puan1 = ratingCounts.FirstOrDefault(x => x.Point == 1)?.Count ?? 0;
+
+
+            var users=_artDBContext.ProductComments.Where(satir => satir.ProductId == id && satir.IsApproved == 1).ToList();
+
+            foreach (var item in users)
+            {
+                ViewBag.Email = applicationDbContext.Users.Where(satir => satir.Id == item.UserId).FirstOrDefault().Email;
+            }
+         
+
+
+
+
+
+                
+
 
             return View(product);
 
@@ -78,7 +127,7 @@ namespace EMedia.Controllers
 
 
         [HttpPost]
-        public IActionResult YorumYap(string productid,string yorum,string rating)
+        public IActionResult YorumYap(string productid, string yorum, string rating)
         {
             //1.yorumu yorum tablosuna ekleyelim.
             //2.o son yorumun id bilgisini alalım.
@@ -87,10 +136,10 @@ namespace EMedia.Controllers
             //_artDBContext.SaveChanges();
 
             Comment comment = new Comment();
-            comment.Text = yorum;            
+            comment.Text = yorum;
 
             _artDBContext.Comments.Add(comment);
-            
+
             _artDBContext.SaveChanges();
 
             //1.yol
@@ -99,16 +148,16 @@ namespace EMedia.Controllers
             //2.yol
             //int yorumid2=_artDBContext.Comments.FirstOrDefault(satir => satir.Text == yorum).CommentId;
 
-      
+
 
             ProductComment productComment = new ProductComment();
-            productComment.ProductId =Convert.ToInt32(productid);
+            productComment.ProductId = Convert.ToInt32(productid);
             productComment.CommentId = comment.CommentId; //3.yol
             //productComment.IsActive = false;
-            productComment.Point =int.Parse(rating);
+            productComment.Point = int.Parse(rating);
             productComment.IsApproved = 0;
             productComment.CreatedDate = DateOnly.FromDateTime(DateTime.Now);
-            string? username=User.Identity?.Name;
+            string? username = User.Identity?.Name;
             productComment.UserId = applicationDbContext.Users.Where(satir => satir.UserName == username).FirstOrDefault().Id;
             _artDBContext.ProductComments.Add(productComment);
             _artDBContext.SaveChanges();
