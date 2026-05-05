@@ -109,7 +109,7 @@
                             <!-- /Wishlist -->
                             <!-- Cart -->
                             <div class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <a asp-controller="Cart" asp-action="Index">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Sepet</span>
                                     <div class="qty">@layoutModel.SepetAdet</div>
@@ -261,6 +261,51 @@
         <!-- /container -->
     </div>
     <!-- /NEWSLETTER -->
+    <!-- Toggle Button -->
+
+
+    <!-- Toggle Button -->
+    <button id="wppToggle"
+            class="btn btn-success"
+            style="position:fixed; bottom:20px; right:20px; z-index:9999;">
+        <span ></span> WhatsApp Destek
+    </button>
+
+    <!-- WhatsApp Panel -->
+    <div id="wppPanel"
+         style="position:fixed; bottom:80px; right:20px; width:260px; background:#fff; border-radius:10px; display:none; padding:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); z-index:9999;">
+
+        <a href="https://api.whatsapp.com/send?phone=905333333333&text=Bilgi alabilir miyim?"
+               target="_blank"
+               style="text-decoration:none; color:#333;">
+
+            <div style="text-align:center;">
+
+                <!-- Asistan Görsel -->
+                <img src="https://www.7nisantasi.com/wp-content/uploads/2019/02/wAPP_Asistan.png"
+                     style="width:60px;"
+                     onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg';">
+
+                <!-- WhatsApp İkon -->
+                <img src="https://www.7nisantasi.com/wp-content/uploads/2019/02/wAPP_Icon.png"
+                     style="width:35px; display:block; margin:5px auto;"
+                     onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg';">
+
+                <div style="margin-top:10px; font-size:14px;">
+                    Sorunuz mu var?<br>
+                    Uzmana mesaj yollamak için tıklayın!
+                </div>
+
+            </div>
+
+        </a>
+    </div>
+
+
+   
+
+
+
     <!-- FOOTER -->
     <footer id="footer">
         <!-- top footer -->
@@ -365,6 +410,16 @@
     <script src="~/js/jquery.zoom.min.js"></script>
     <script src="~/js/main.js"></script>
 
+
+
+    <script>
+            $(document).ready(function() {
+                $("#wppToggle").click(function() {
+                    $("#wppPanel").fadeToggle();
+                });
+            });
+    </script>
+   
 
 </body>
 </html>

@@ -21,13 +21,19 @@ namespace EMedia.Controllers
             this.applicationDbContext = applicationDbContext; //this: bu class demek
             //eğer tanımlama satırındaki adı ile ctor içerisindeki parametre adı aynıysa this kullan
         }
+        int? eklenecekAdet;
+        int mevcutAdet;
         public IActionResult Index()
         {
+
+            mevcutAdet = HttpContext.Session.GetInt32("adet") ?? 0;
+
+
             var layoutModel = new LayoutViewModel
             {
                 SiteTitle = "Kültür Sanat Portalı",
                 MenuItems = _artDBContext.Categories.Where(satir => satir.IsActive == true).Select(satir => satir.Name).ToList(),
-                SepetAdet = TempData["adet"] != null ? (int)TempData["adet"] : 0
+                SepetAdet = mevcutAdet + (eklenecekAdet ?? 0)
             };
 
             ViewBag.LayoutModel = layoutModel;
@@ -56,11 +62,12 @@ namespace EMedia.Controllers
 
         public IActionResult Details(int id)
         {
-
+            TempData["adet"] = HttpContext.Session.GetInt32("adet");
             var layoutModel = new LayoutViewModel
             {
                 SiteTitle = "Kültür Sanat Portalı",
-                MenuItems = _artDBContext.Categories.Where(satir => satir.IsActive == true).Select(satir => satir.Name).ToList()
+                MenuItems = _artDBContext.Categories.Where(satir => satir.IsActive == true).Select(satir => satir.Name).ToList(),
+                SepetAdet = TempData["adet"] != null ? (int)TempData["adet"] : 0
             };
 
             ViewBag.LayoutModel = layoutModel;
@@ -107,19 +114,19 @@ namespace EMedia.Controllers
             ViewBag.Puan1 = ratingCounts.FirstOrDefault(x => x.Point == 1)?.Count ?? 0;
 
 
-            var users=_artDBContext.ProductComments.Where(satir => satir.ProductId == id && satir.IsApproved == 1).ToList();
+            var users = _artDBContext.ProductComments.Where(satir => satir.ProductId == id && satir.IsApproved == 1).ToList();
 
             foreach (var item in users)
             {
                 ViewBag.Email = applicationDbContext.Users.Where(satir => satir.Id == item.UserId).FirstOrDefault().Email;
             }
-         
 
 
 
 
 
-                
+
+
 
 
             return View(product);
@@ -175,8 +182,11 @@ namespace EMedia.Controllers
         [HttpPost]
         public IActionResult SepeteEkle(int sepetAdet)
         {
-            HttpContext.Session.SetInt32("adet", sepetAdet);
-            TempData["adet"] = HttpContext.Session.GetInt32("adet");
+            int mevcutAdet = HttpContext.Session.GetInt32("adet")??0;             
+            
+            HttpContext.Session.SetInt32("adet", sepetAdet+mevcutAdet);
+
+            TempData["adet"] = HttpContext.Session.GetInt32("adet");    
 
             return RedirectToAction("Index", "Products");
         }

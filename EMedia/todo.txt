@@ -189,11 +189,10 @@ onaylı mı eklemek gerek.+++
 5.o urune kim kaç yıldız vermiş, ortalama alıp gösterme++
 her bir ürün için bütün yorumlara bakıp hangi puan kaçar tane bunu hesaplamak ++
 
-6.kişi adı john doe değil bizim email adresimiz olmalı (ödev)
 
-Sepete Ürün Ekleme (Session) +++ (details tarafına tıklanınca 0lanıyor. bu bug çözülmeli)
+Sepete Ürün Ekleme (Session) +++ (details tarafına tıklanınca 0lanıyor. bu bug çözülmeli+++)
 
-Whatsapp Destek APi baglama
+Whatsapp Destek APi baglama ++
 
 
 --rock muzik album - rock muzik kategorisi - metal .
@@ -226,8 +225,43 @@ Bunu nasıl çözeriz? +++ if yazdık
 
 
 
+05.05.2026
+
+Ternary Kullanımı 
+TempData["adet"] != null ? (int)TempData["adet"] : 0  //ternary 
+
+int a;
+if(TempData["adet"] != null)
+	a=(int)TempData["adet"];
+else
+	a=0;
+
+Sepetteki Ürünleri Göstermek için 
+1.CartController oluşturduk
+2.Cart/Index sayfası oluşturduk
+3.Cart/Index sayfasına sepet içerisindeki ürünleri göstermek kodlar yazılacak
+4.Tıklanınca hangi ürün kaç tane review sayfası gibi gösterilecek
+5.bu sayfada toplam tutar gösterimeli.
+6.Ödeme sayfasına geçiş için ödeme buttonu eklenmeli
+7.ödeme sayfasında kullanıcının kredi kartı bilgilerini almak için sayfa hazırlanacak
+8.tıklanınca Kredi kartı bilgisi dbdeki bir tablodan okunur limit yeterli mi diye bakılır, yeterli ise ödeme onaylanır, değilse reddedilir.
+9.kredi kartı limitinden toplam alışveriş tutarı düşülür ve güncellenir.
+
+ShoppingCart classı yazılacak
+
+//sepetteki ürünleri getirecek
+//kişi login durumda ise mailini,login değilse guid değerini dönecek metot
+//sepete ürün ekleme metodu
+//sepetten ürün silme metodu
+//sepeti boşaltma metodu
+//sepetteki ürünlerin toplam tutarını hesaplama metodu
+//yeni siparis oluşturma metodu
+//login olmayan kişini yaptıgı alışerişleri login olunca o kişiye aktarma taşıma işlemi
 
 
+
+
+6.kişi adı john doe değil bizim email adresimiz olmalı (ödev)
 
 
 
