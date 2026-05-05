@@ -4,5 +4,6 @@
     {
         public string SiteTitle { get; set; }
         public List<string> MenuItems { get; set; }
+        public int SepetAdet { get; set; }
     }
 }

@@ -136,19 +136,21 @@
 							</select>
 						</label>
 					</div> *@
-
+                    <form method="post" asp-action="SepeteEkle" asp-controller="Products">
                     <div class="add-to-cart">
                         <div class="qty-label">
                             Adet
                             <div class="input-number">
-                                <input type="number">
+                                <input type="number" name="sepetAdet" value="1">
                                 <span class="qty-up">+</span>
                                 <span class="qty-down">-</span>
                             </div>
-                        </div>
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Sepete Ekle</button>
+                        </div>                  
+                            
+                        <button class="add-to-cart-btn" type="submit"><i class="fa fa-shopping-cart"></i> Sepete Ekle</button>
+                     
                     </div>
-
+                    </form>
                     <ul class="product-btns">
                         <li><a href="#"><i class="fa fa-heart-o"></i> Beğen</a></li>
                         @* <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li> *@
