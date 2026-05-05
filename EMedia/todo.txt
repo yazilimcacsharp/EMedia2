@@ -191,7 +191,7 @@ her bir ürün için bütün yorumlara bakıp hangi puan kaçar tane bunu hesapl
 
 6.kişi adı john doe değil bizim email adresimiz olmalı (ödev)
 
-Sepete Ürün Ekleme (Session)
+Sepete Ürün Ekleme (Session) +++ (details tarafına tıklanınca 0lanıyor. bu bug çözülmeli)
 
 Whatsapp Destek APi baglama
 

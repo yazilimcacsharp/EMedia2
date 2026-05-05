@@ -26,7 +26,8 @@ namespace EMedia.Controllers
             var layoutModel = new LayoutViewModel
             {
                 SiteTitle = "Kültür Sanat Portalı",
-                MenuItems = _artDBContext.Categories.Where(satir => satir.IsActive == true).Select(satir => satir.Name).ToList()
+                MenuItems = _artDBContext.Categories.Where(satir => satir.IsActive == true).Select(satir => satir.Name).ToList(),
+                SepetAdet = TempData["adet"] != null ? (int)TempData["adet"] : 0
             };
 
             ViewBag.LayoutModel = layoutModel;
@@ -168,6 +169,16 @@ namespace EMedia.Controllers
             return RedirectToAction("Details", "Products", new { id = productid });
 
 
+        }
+
+
+        [HttpPost]
+        public IActionResult SepeteEkle(int sepetAdet)
+        {
+            HttpContext.Session.SetInt32("adet", sepetAdet);
+            TempData["adet"] = HttpContext.Session.GetInt32("adet");
+
+            return RedirectToAction("Index", "Products");
         }
 
 
