@@ -4,6 +4,7 @@ using EMedia.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EMedia.Migrations
 {
     [DbContext(typeof(ArtDBContext))]
-    partial class ArtDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260507161419_AddCarts")]
+    partial class AddCarts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,93 +115,6 @@ namespace EMedia.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("EMedia.Models.Order", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Fee")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Total")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OrderId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("EMedia.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"));
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("OrderDetailId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderDetails");
-                });
-
             modelBuilder.Entity("EMedia.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -243,7 +159,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3261),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(250),
                             FotoPath = "images/pop_album.jpg",
                             IsActive = true,
                             Name = "Pop Albümü - Greatest Hits",
@@ -254,7 +170,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3282),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(266),
                             FotoPath = "images/rock_album.jpg",
                             IsActive = true,
                             Name = "Rock Albümü - Legends of Rock",
@@ -265,7 +181,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3284),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(269),
                             FotoPath = "images/jazz_album.jpg",
                             IsActive = true,
                             Name = "Jazz Albümü - Smooth Jazz Collection",
@@ -276,7 +192,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3287),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(271),
                             FotoPath = "images/blues_album.jpg",
                             IsActive = true,
                             Name = "Blues Albümü - Soulful Blues",
@@ -287,7 +203,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3289),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(274),
                             FotoPath = "images/classical_album.jpg",
                             IsActive = true,
                             Name = "Klasik Albüm - Mozart Collection",
@@ -298,7 +214,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3291),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(276),
                             FotoPath = "images/metal_album.jpg",
                             IsActive = true,
                             Name = "Metal Albümü - Heavy Metal Anthems",
@@ -309,7 +225,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3294),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(278),
                             FotoPath = "images/reggae_album.jpg",
                             IsActive = true,
                             Name = "Reggae Albümü - Bob Marley Tribute",
@@ -320,7 +236,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3296),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(280),
                             FotoPath = "images/action_madmax.jpg",
                             IsActive = true,
                             Name = "Aksiyon Filmi - Mad Max: Fury Road",
@@ -331,7 +247,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3298),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(283),
                             FotoPath = "images/action_johnwick.jpg",
                             IsActive = true,
                             Name = "Aksiyon Filmi - John Wick",
@@ -342,7 +258,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3300),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(285),
                             FotoPath = "images/drama_shawshank.jpg",
                             IsActive = true,
                             Name = "Dram Filmi - The Shawshank Redemption",
@@ -353,7 +269,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3303),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(287),
                             FotoPath = "images/drama_forrestgump.jpg",
                             IsActive = true,
                             Name = "Dram Filmi - Forrest Gump",
@@ -364,7 +280,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 12,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3305),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(290),
                             FotoPath = "images/comedy_mask.jpg",
                             IsActive = true,
                             Name = "Komedi Filmi - The Mask",
@@ -375,7 +291,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 13,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3307),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(292),
                             FotoPath = "images/comedy_homealone.jpg",
                             IsActive = true,
                             Name = "Komedi Filmi - Home Alone",
@@ -386,7 +302,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 14,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3309),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(295),
                             FotoPath = "images/tiyatro_trajedi_oidipus.jpg",
                             IsActive = true,
                             Name = "Trajedi Oyunu - Kral Oidipus",
@@ -397,7 +313,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 15,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3312),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(297),
                             FotoPath = "images/tiyatro_komedi_yazgecesi.jpg",
                             IsActive = true,
                             Name = "Komedi Oyunu - Bir Yaz Gecesi Rüyası",
@@ -408,7 +324,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 16,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3314),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(299),
                             FotoPath = "images/tiyatro_dram_hamlet.jpg",
                             IsActive = true,
                             Name = "Dram Oyunu - Hamlet",
@@ -419,7 +335,7 @@ namespace EMedia.Migrations
                         new
                         {
                             Id = 17,
-                            CreatedDate = new DateTime(2026, 5, 7, 20, 45, 18, 354, DateTimeKind.Local).AddTicks(3316),
+                            CreatedDate = new DateTime(2026, 5, 7, 19, 14, 17, 994, DateTimeKind.Local).AddTicks(301),
                             FotoPath = "images/tiyatro_muzikli_lesmis.jpg",
                             IsActive = true,
                             Name = "Müzikli Tiyatro - Les Misérables",
@@ -643,25 +559,6 @@ namespace EMedia.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("EMedia.Models.OrderDetail", b =>
-                {
-                    b.HasOne("EMedia.Models.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EMedia.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("EMedia.Models.Product", b =>
                 {
                     b.HasOne("EMedia.Models.SubCategory", "SubCategory")
@@ -711,11 +608,6 @@ namespace EMedia.Migrations
             modelBuilder.Entity("EMedia.Models.Comment", b =>
                 {
                     b.Navigation("ProductComments");
-                });
-
-            modelBuilder.Entity("EMedia.Models.Order", b =>
-                {
-                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("EMedia.Models.Product", b =>
