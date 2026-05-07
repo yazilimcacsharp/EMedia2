@@ -1,6 +1,7 @@
 using EMedia.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace EMedia
 {
@@ -28,6 +29,14 @@ namespace EMedia
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            //sunucuda otomatik migration yapsın istersek
+            //var scope = app.Services.CreateScope();
+            //var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            //var db2 = scope.ServiceProvider.GetRequiredService<ArtDBContext>();
+
+            //db.Database.Migrate();
+            //db2.Database.Migrate();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

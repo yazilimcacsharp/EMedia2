@@ -12,6 +12,11 @@ namespace EMedia.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<ProductComment> ProductComments { get; set; }
+        public DbSet<Cart> Carts { get; set; } //sepetteki ürünleri dbde tutacak tablo
+        public DbSet<Order> Orders { get; set; } 
+        public DbSet<OrderDetail> OrderDetails { get; set; } 
+
+       
 
         public ArtDBContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
