@@ -1,9 +1,13 @@
-﻿<div class="section">
+﻿@model EMedia.ViewModels.ShoppingCartViewModel
+
+<div class="section">
 	<!-- container -->
 	<div class="container">
 		<!-- row -->
 		<div class="row">
+			<form asp-action="AddressAndPayment" asp-controller="Checkout" method="post">
 
+			
 			<div class="col-md-7">
 				<!-- Billing Details -->
 				<div class="billing-details">
@@ -11,28 +15,28 @@
 						<h3 class="title">Billing address</h3>
 					</div>
 					<div class="form-group">
-						<input class="input" type="text" name="first-name" placeholder="First Name">
+						<input class="input" type="text" name="FirstName" placeholder="First Name">
 					</div>
 					<div class="form-group">
-						<input class="input" type="text" name="last-name" placeholder="Last Name">
+						<input class="input" type="text" name="LastName" placeholder="Last Name">
 					</div>
 					<div class="form-group">
-						<input class="input" type="email" name="email" placeholder="Email">
+						<input class="input" type="email" name="Email" placeholder="Email">
 					</div>
 					<div class="form-group">
-						<input class="input" type="text" name="address" placeholder="Address">
+							<input class="input" type="text" name="Address" placeholder="Address">
 					</div>
 					<div class="form-group">
-						<input class="input" type="text" name="city" placeholder="City">
+						<input class="input" type="text" name="City" placeholder="City">
 					</div>
 					<div class="form-group">
-						<input class="input" type="text" name="country" placeholder="Country">
+						<input class="input" type="text" name="Country" placeholder="Country">
 					</div>
 					<div class="form-group">
-						<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
+						<input class="input" type="text" name="PostalCode" placeholder="ZIP Code">
 					</div>
 					<div class="form-group">
-						<input class="input" type="tel" name="tel" placeholder="Telephone">
+						<input class="input" type="tel" name="Phone" placeholder="Telephone">
 					</div>
 					<div class="form-group">
 						<div class="input-checkbox">
@@ -104,28 +108,29 @@
 				<div class="order-summary">
 					<div class="order-col">
 						<div><strong>PRODUCT</strong></div>
+						<div><strong>COUNT</strong></div>
 						<div><strong>TOTAL</strong></div>
 					</div>
-					<div class="order-products">
-						<div class="order-col">
-							<div>1x Product Name Goes Here</div>
-							<div>$980.00</div>
+					@foreach(var item in Model.CartItems){
+						<div class="order-products">
+							<div class="order-col">
+								<div>@item.Product.Name</div>
+								<div>@item.Count</div>
+								<div>@item.Product.Price</div>
+							</div>							
 						</div>
-						<div class="order-col">
-							<div>2x Product Name Goes Here</div>
-							<div>$980.00</div>
-						</div>
-					</div>
+					}
+				
 					<div class="order-col">
 						<div>Shiping</div>
 						<div><strong>FREE</strong></div>
 					</div>
 					<div class="order-col">
-						<div><strong>TOTAL</strong></div>
-						<div><strong class="order-total">$2940.00</strong></div>
+						<div><strong>Toplam Tutar</strong></div>
+						<div><strong class="order-total">@Model.CartTotal</strong></div>
 					</div>
 				</div>
-				<div class="payment-method">
+				@* <div class="payment-method">
 					<div class="input-radio">
 						<input type="radio" name="payment" id="payment-1">
 						<label for="payment-1">
@@ -156,17 +161,19 @@
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 						</div>
 					</div>
-				</div>
+				</div> *@
 				<div class="input-checkbox">
 					<input type="checkbox" id="terms">
 					<label for="terms">
 						<span></span>
-						I've read and accept the <a href="#">terms &amp; conditions</a>
+						Onaylıyorum<a href="#">terms &amp; conditions</a>
 					</label>
 				</div>
-				<a href="#" class="primary-btn order-submit">Place order</a>
+					<button type="submit" class="primary-btn order-submit">Sipariş Ver</button>
+				@* <a href="#" class="primary-btn order-submit">Sipariş Ver</a> *@
 			</div>
 			<!-- /Order Details -->
+			</form>
 		</div>
 		<!-- /row -->
 	</div>

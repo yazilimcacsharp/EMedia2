@@ -102,7 +102,7 @@
 
 	/////////////////////////////////////////
 
-	// Input number
+	//// Input number
 	$('.input-number').each(function() {
 		var $this = $(this),
 		$input = $this.find('input[type="number"]'),

@@ -256,12 +256,20 @@ ShoppingCart classı yazılacak
 //sepeti boşaltma metodu
 //sepetteki ürünlerin toplam tutarını hesaplama metodu
 //yeni siparis oluşturma metodu
-//login olmayan kişini yaptıgı alışerişleri login olunca o kişiye aktarma taşıma işlemi
+//login olmayan kişini yaptıgı alışverişleri login olunca o kişiye aktarma taşıma işlemi
 
 
 
 
 6.kişi adı john doe değil bizim email adresimiz olmalı (ödev)
+
+
+-bug-
+1.sepete ürün ekledik, tekrar ürünler sayfasına gelince sepetteki ürün adedi 0'lanıyor.
+
+todolist
+ödeme kısmı sayfasını yapıldı, uctan uca test etme , sepeti boşalt, 
+neler yapabiliriz?
 
 
 

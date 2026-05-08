@@ -65,7 +65,7 @@ namespace EMedia.Models
 
 
         //sepete ürün ekle
-        public void AddToCart(Product product)
+        public void AddToCart(Product product,int sepetAdet)
         {
             var cartItem = _context.Carts.FirstOrDefault(satir => satir.CartId == ShoppingCartId && satir.ProductId == product.Id);
 
@@ -76,14 +76,14 @@ namespace EMedia.Models
                 {
                     ProductId = product.Id,
                     CartId = ShoppingCartId,
-                    Count = 1,
+                    Count = sepetAdet,
                     DateCreated = DateTime.Now
                 };
                 _context.Carts.Add(cartItem);
             }
             else
             {
-                cartItem.Count++;
+                cartItem.Count += sepetAdet;
             }
             _context.SaveChanges();
         }
@@ -184,7 +184,7 @@ namespace EMedia.Models
 
                 if (order.Country == "USA" || order.Country == "America")
                     order.Fee = 0.23m;
-                else if (order.Country == "Turkey" || order.Country == "Türkiye")
+                else if (order.Country.ToLower() == "turkey" || order.Country.ToLower() == "türkiye")
                     order.Fee = 0.18m;
                 else
                     order.Fee = 0.10m;

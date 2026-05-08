@@ -26,14 +26,14 @@ namespace EMedia.Controllers
         public IActionResult Index()
         {
 
-            mevcutAdet = HttpContext.Session.GetInt32("adet") ?? 0;
-
+            
+            TempData["adet"] = HttpContext.Session.GetInt32("adet");
 
             var layoutModel = new LayoutViewModel
             {
                 SiteTitle = "Kültür Sanat Portalı",
                 MenuItems = _artDBContext.Categories.Where(satir => satir.IsActive == true).Select(satir => satir.Name).ToList(),
-                SepetAdet = mevcutAdet + (eklenecekAdet ?? 0)
+                SepetAdet = TempData["adet"] != null ? (int)TempData["adet"] : 0
             };
 
             ViewBag.LayoutModel = layoutModel;
