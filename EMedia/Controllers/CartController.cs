@@ -26,10 +26,13 @@ namespace EMedia.Controllers
                 MenuItems = _artDBContext.Categories.Where(satir => satir.IsActive == true).Select(satir => satir.Name).ToList()
             };
 
-          
-            
+            string adetStr = Request.Cookies["adet"];
+            layoutModel.SepetAdet = string.IsNullOrEmpty(adetStr) ? 0 : Convert.ToInt32(adetStr);
 
-            var cart=shoppingCart.GetCart(HttpContext);
+
+
+
+            var cart =shoppingCart.GetCart(HttpContext);
 
             var viewModel = new ShoppingCartViewModel()
             {
@@ -38,7 +41,7 @@ namespace EMedia.Controllers
             };
 
 
-            ViewData["CartCount"] = HttpContext.Session.GetString("adet");
+            ViewData["CartCount"] = adetStr;
             layoutModel.SepetAdet = Convert.ToInt32(HttpContext.Session.GetString("adet"));
 
             ViewBag.LayoutModel = layoutModel;
@@ -53,6 +56,9 @@ namespace EMedia.Controllers
             var cart=shoppingCart.GetCart(HttpContext);
             cart.AddToCart(eklenecekUrun,sepetAdet);
             HttpContext.Session.SetString("adet", cart.GetCount().ToString());
+
+            //Cookie tarafına ekleme işlemi
+            Response.Cookies.Append("adet", cart.GetCount().ToString());
 
             return RedirectToAction("Index");
         }
@@ -77,6 +83,9 @@ namespace EMedia.Controllers
             int itemCount = cart.RemoveFromCart(id); //silme işlemi sonrasında sepette geriye kalan ürünleriin ürün adedini bulur.
             HttpContext.Session.SetString("adet", cart.GetCount().ToString()); //güncel ürün adet bilgisini sessiondaki adet key değerine atar.
 
+
+            Response.Cookies.Append("adet", cart.GetCount().ToString());
+
             var result = new ShoppingCartRemoveViewModel()
             {
                 Message = productName + " ürününü silmek istediğine emin misin?",
@@ -87,6 +96,19 @@ namespace EMedia.Controllers
             };
 
             return Json(result);
+        }
+
+
+        public IActionResult EmptyCart() 
+        {
+            var cart = shoppingCart.GetCart(HttpContext);
+            cart.EmptyCart();
+            HttpContext.Session.SetString("adet", "0");
+
+            //Cookie tarafına ekleme işlemi
+            Response.Cookies.Append("adet", "0");
+
+            return RedirectToAction("Index");
         }
 
 

@@ -26,6 +26,18 @@ namespace EMedia.Controllers
                 MenuItems = _artDBContext.Categories.Where(satir=>satir.IsActive==true).Select(satir => satir.Name).ToList()
             };
 
+            string adetSession = HttpContext.Session.GetString("adet") ?? "0";
+            HttpContext.Session.SetString("adet", adetSession);
+           
+            Response.Cookies.Append("adet", adetSession);
+
+            // Bu request içinde güncel deðeri buradan alýn
+            string adetStr = adetSession;
+
+
+
+            layoutModel.SepetAdet=string.IsNullOrEmpty(adetStr) ?0 : Convert.ToInt32(adetStr);
+
             ViewBag.LayoutModel = layoutModel;
 
 

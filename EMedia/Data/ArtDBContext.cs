@@ -15,6 +15,7 @@ namespace EMedia.Data
         public DbSet<Cart> Carts { get; set; } //sepetteki ürünleri dbde tutacak tablo
         public DbSet<Order> Orders { get; set; } 
         public DbSet<OrderDetail> OrderDetails { get; set; } 
+        public DbSet<CreditCart> CreditCarts { get; set; } 
 
        
 

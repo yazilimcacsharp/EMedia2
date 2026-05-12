@@ -54,7 +54,7 @@ namespace EMedia.Controllers
 
                 Order.PostalCode = values["PostalCode"];
                 Order.Total = Convert.ToDecimal(values["Total"]);
-
+                HttpContext.Session.SetString("toplamTutar", Order.Total.ToString());
                 _artDBContext.Orders.Add(Order);
                 _artDBContext.SaveChanges();
 
@@ -70,6 +70,24 @@ namespace EMedia.Controllers
 
         public IActionResult Complete()
         {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Complete(string cartNo,string name,string expdate,string cvc)
+        {
+            string tutar=HttpContext.Session.GetString("toplamTutar");
+            var kayit=_artDBContext.CreditCarts.Where(satir => satir.CreditCartNumber == cartNo && satir.FullName == name && satir.CVC == cvc && satir.ExpDate == expdate && satir.Limit > int.Parse(tutar)).FirstOrDefault();
+
+            if (kayit != null)
+            {
+                //işlem başarılı.
+            }
+            else
+            {
+                //bilgiler yanlış
+            }
             return View();
         }
 

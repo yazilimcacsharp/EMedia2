@@ -265,10 +265,10 @@ ShoppingCart classı yazılacak
 
 
 -bug-
-1.sepete ürün ekledik, tekrar ürünler sayfasına gelince sepetteki ürün adedi 0'lanıyor.
+1.sepete ürün ekledik, tekrar ürünler sayfasına gelince sepetteki ürün adedi 0'lanıyor.+++
 
 todolist
-ödeme kısmı sayfasını yapıldı, uctan uca test etme , sepeti boşalt, 
+ödeme kısmı sayfası yapıldı +, uctan uca test etme , sepeti boşalt +, 
 neler yapabiliriz?
 
 

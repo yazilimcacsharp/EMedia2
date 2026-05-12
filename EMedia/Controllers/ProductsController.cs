@@ -25,7 +25,6 @@ namespace EMedia.Controllers
         int mevcutAdet;
         public IActionResult Index()
         {
-
             
             TempData["adet"] = HttpContext.Session.GetInt32("adet");
 
@@ -35,6 +34,9 @@ namespace EMedia.Controllers
                 MenuItems = _artDBContext.Categories.Where(satir => satir.IsActive == true).Select(satir => satir.Name).ToList(),
                 SepetAdet = TempData["adet"] != null ? (int)TempData["adet"] : 0
             };
+
+            string adetStr = Request.Cookies["adet"];
+            layoutModel.SepetAdet = string.IsNullOrEmpty(adetStr) ? 0 : Convert.ToInt32(adetStr);
 
             ViewBag.LayoutModel = layoutModel;
 
@@ -69,6 +71,11 @@ namespace EMedia.Controllers
                 MenuItems = _artDBContext.Categories.Where(satir => satir.IsActive == true).Select(satir => satir.Name).ToList(),
                 SepetAdet = TempData["adet"] != null ? (int)TempData["adet"] : 0
             };
+
+            string adetStr = Request.Cookies["adet"];
+            layoutModel.SepetAdet = string.IsNullOrEmpty(adetStr) ? 0 : Convert.ToInt32(adetStr);
+
+
 
             ViewBag.LayoutModel = layoutModel;
 
